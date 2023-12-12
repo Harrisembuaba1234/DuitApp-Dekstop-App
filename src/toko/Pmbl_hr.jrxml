@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0d002b0e-e6f3-4f17-9834-357c308b8119">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Par_tanggal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     barang.`nama_barang` AS barang_nama_barang,
+     barang.`harga_beli` AS barang_harga_beli,
+     detail_beli.`jumlah` AS detail_beli_jumlah,
+     detail_beli.`sub_total` AS detail_beli_sub_total,
+     pembelian.`kode_pembelian` AS pembelian_kode_pembelian,
+     pembelian.`tgl_pembelian` AS pembelian_tgl_pembelian
+FROM
+     `barang` barang INNER JOIN `detail_beli` detail_beli ON barang.`kode_barang` = detail_beli.`kode_barang`
+     INNER JOIN `pembelian` pembelian ON detail_beli.`kode_pembelian` = pembelian.`kode_pembelian`
+where
+pembelian.tgl_pembelian = $P{Par_tanggal}
+order by pembelian.`kode_pembelian`]]>
+	</queryString>
+	<field name="barang_nama_barang" class="java.lang.String"/>
+	<field name="barang_harga_beli" class="java.lang.Float"/>
+	<field name="detail_beli_jumlah" class="java.lang.Integer"/>
+	<field name="detail_beli_sub_total" class="java.lang.Float"/>
+	<field name="pembelian_kode_pembelian" class="java.lang.String"/>
+	<field name="pembelian_tgl_pembelian" class="java.sql.Date"/>
+	<variable name="detail_beli_sub_total_1" class="java.lang.Float" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{detail_beli_sub_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89" splitType="Stretch">
+			<staticText>
+				<reportElement x="89" y="0" width="391" height="54" uuid="7022305f-30e9-4a57-94f7-a26855ce8ecc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="36" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[JAYA ABADI CELL 26]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="54" width="555" height="29" uuid="1e4816ee-d8f3-443d-8b49-f0170f2dd9f3"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN PEMBELIAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<rectangle>
+				<reportElement x="362" y="41" width="100" height="20" uuid="5a1a3bc1-d23f-4b2f-a49a-bad8b8a92839"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="41" width="100" height="20" uuid="23dca187-ebcd-4eeb-ba47-0d0ef4ef1d75"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="200" y="41" width="62" height="20" uuid="2cb5c75b-df83-4cce-9baf-04f4bb20fcd6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="100" y="41" width="100" height="20" uuid="62071065-2ea5-4ba4-bf9b-746f5f31d273"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="262" y="41" width="100" height="20" uuid="48657860-ab02-4d46-b9a6-3a299a52428c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="262" y="41" width="100" height="20" uuid="3042f663-d38f-4156-ad9d-fa5655c96fd6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="41" width="100" height="20" uuid="c36d43ac-ce70-43de-aeec-a09073de57fc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="100" y="41" width="100" height="20" uuid="3481ca2f-7fc1-41c4-ae2f-77c9b5dfa426"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="362" y="41" width="100" height="20" uuid="057f905a-2542-4343-9e12-308ed49afcf6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="200" y="41" width="62" height="20" uuid="60e75cbd-8217-4ccf-bfcd-f0984a245de4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="41" width="100" height="20" uuid="a85f7efe-f12a-4420-a4f6-a6d50b2c8134"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nota_Pembelian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="41" width="100" height="20" uuid="dfbbdcc7-2a8e-43d0-81ec-e5455e114432"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama_Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="41" width="62" height="20" uuid="bf80245f-d187-4e41-bb8a-814d3e12cc42"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="41" width="100" height="20" uuid="534b340b-37c9-41cc-ac2e-0e717c46a07c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Harga_Beli]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="362" y="41" width="100" height="20" uuid="6fc8bfad-54ef-425d-8b7a-ea2ea7791e2f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Sub_Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="0" width="100" height="20" uuid="72ddbd6d-7afc-4ce1-93ae-91d6addd7363"/>
+				<textFieldExpression><![CDATA[$P{Par_tanggal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="20" uuid="e32c98ba-bbd8-4e0f-b2c5-cab14d60b01e"/>
+				<text><![CDATA[Tanggal :]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="262" y="0" width="100" height="20" uuid="d3e9315e-e65d-467b-901d-5648746f5b04"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="100" height="20" uuid="8fb598c1-3426-4a99-8076-3542f1a02937"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="100" y="0" width="100" height="20" uuid="7a383d39-fcc5-4af1-8aa4-f93cd75775a4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="362" y="0" width="100" height="20" uuid="cb3d20ec-7a12-429e-a281-ef011b61fc55"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="200" y="0" width="62" height="20" uuid="3c33ae11-e905-4358-96b0-6dc94a3cd2de"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="6220f6f8-a33d-43a5-9cf5-cf2512b20000"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pembelian_kode_pembelian}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="366ad328-ff7c-467a-9cde-f2f9cc365389"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{barang_nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="62" height="20" uuid="6051bb0d-aea1-44cf-a2cc-a36fd1529acb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{detail_beli_jumlah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="100" height="20" uuid="dc4e671d-ec43-4562-aed0-7feae4c10e7d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{barang_harga_beli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="0" width="100" height="20" uuid="13d11b56-e2c4-4949-aa7f-4e5a70a35593"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{detail_beli_sub_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="287" y="16" width="143" height="20" uuid="2682e770-1254-408c-842e-7db74468c8b1"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total Pengeluaran : Rp.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="16" width="100" height="20" uuid="34a20761-f2ca-4131-8daa-babf80f2dd06"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{detail_beli_sub_total_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
